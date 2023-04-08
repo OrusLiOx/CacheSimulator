@@ -1,2 +1,4 @@
-# CacheSimulator
-Computer Architecture - HW 3
+# Cache Simulator
+(How to build and run code)
+
+(known bugs or limitations)
