@@ -45,8 +45,8 @@ int main(int argc, char*argv[])
 
    // setup output file
    ofstream write;
-   remove("cach_sim_output");
-	write.open("cach_sim_output", std::fstream::out);
+   remove("cache_sim_output");
+	write.open("cache_sim_output", std::fstream::out);
 
    // prepare for loop
    unsigned count = 0;
@@ -63,7 +63,7 @@ int main(int argc, char*argv[])
    }
 
 // DONE
-   cout << "Check cach_sim_output for results"<<endl;
+   cout << "Check cache_sim_output for results"<<endl;
   
    return 0;
 }
