@@ -47,7 +47,7 @@ int main(int argc, char*argv[])
 
    while(input)
    {
-      addr = stoul(buffer);
+      addr = strtoul(buffer.c_str(), NULL, 10);
       input >> buffer;
       
       string result = cache.get(count, addr);
