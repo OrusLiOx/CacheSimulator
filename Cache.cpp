@@ -54,15 +54,17 @@ public:
 
    void display()
    {
+      cout<<"Cache:";
       for(unsigned k = 0; k< assoc; k++)
       {
-         cout << k << endl;
+         cout << endl << k ;
          for(int j=0; j<setSize;j++)
          {
-            cout<< j <<" : ";
+            cout<<endl<< j <<" : ";
             entries[k][j].display();
          } 
       }
+      cout<<endl;
    }
 
    string get(unsigned ref, unsigned addr)
