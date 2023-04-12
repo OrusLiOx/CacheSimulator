@@ -34,7 +34,7 @@ int main(int argc, char*argv[])
    // cache sends back result
    // record address + result to file
    ifstream read;
-   read.open("text.txt");
+   read.open(filename);
    string buffer;
    unsigned addr;
    getline(read, buffer);
