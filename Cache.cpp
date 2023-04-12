@@ -4,6 +4,37 @@
 
 using namespace std;
 
+class Entry 
+{
+public:
+   Entry()
+    {
+        valid = false;
+        ref = -1;
+    }
+
+   void display()
+   {
+      cout << "Valid: "<< valid;
+      if(valid)
+         cout << " | Tag: " << tag << " | Ref: " << ref;
+   }
+
+   void setTag(int _tag) { tag = _tag; }
+   int getTag() { return tag; }
+
+   void setValid(bool _valid) { valid = _valid; }
+   bool isValid() { return valid; }
+
+   void setRef(int _ref) { ref = _ref; }
+   int getRef() { return ref; }
+
+private:  
+   bool valid;
+   unsigned tag;
+   int ref;
+};
+
 class Cache
 {
 public:
@@ -78,35 +109,4 @@ private:
    unsigned assoc, setSize;
    set<unsigned> accessed;
    vector<std::vector<Entry>> entries;
-};
-
-class Entry 
-{
-public:
-   Entry()
-    {
-        valid = false;
-        ref = -1;
-    }
-
-   void display()
-   {
-      cout << "Valid: "<< valid;
-      if(valid)
-         cout << " | Tag: " << tag << " | Ref: " << ref;
-   }
-
-   void setTag(int _tag) { tag = _tag; }
-   int getTag() { return tag; }
-
-   void setValid(bool _valid) { valid = _valid; }
-   bool isValid() { return valid; }
-
-   void setRef(int _ref) { ref = _ref; }
-   int getRef() { return ref; }
-
-private:  
-   bool valid;
-   unsigned tag;
-   int ref;
 };
