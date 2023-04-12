@@ -47,7 +47,7 @@ public:
       {
          entries.push_back(vector<Entry>());
          for(unsigned k = 0; k<setSize; k++)
-         entries[set].push_back(Entry());
+            entries[set].push_back(Entry());
       }
    }
    Cache(){}
@@ -97,7 +97,7 @@ public:
             e.setRef(ref);
             e.setTag(addr-i);
             e.setValid(true);
-            cout<<"retrieve val: " << e.isValid() << " " << e.getTag()<< " " << e.getRef()<<endl;  
+            cout<<"Put: " << e.isValid() << " " << e.getTag()<< " " << e.getRef()<< " in: "<<k<<","<<i<<endl;  
             return "MISS - COMPULSARY";
          }
          if(e.getRef()<entries[oldest][i].getRef())

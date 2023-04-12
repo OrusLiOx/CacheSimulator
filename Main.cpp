@@ -53,6 +53,7 @@ int main(int argc, char*argv[])
       string result = cache.get(count, addr);
       cout << addr << ": " << result<<endl;
       cache.display();
+      count++;
    }
 
 // DONE
