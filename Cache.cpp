@@ -97,6 +97,7 @@ public:
             e.setRef(ref);
             e.setTag(addr-i);
             e.setValid(true);
+            cout<<"retrieve val: " << e.isValid() << " " << e.getTag()<< " " << e.getRef()<<endl;  
             return "MISS - COMPULSARY";
          }
          if(e.getRef()<entries[oldest][i].getRef())
