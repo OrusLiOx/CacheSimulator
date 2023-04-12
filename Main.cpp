@@ -59,7 +59,6 @@ int main(int argc, char*argv[])
       
       string result = cache.get(count, addr);
       write << addr << ": " << result << endl;
-      cache.display();
       count++;
    }
 
