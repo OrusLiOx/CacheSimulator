@@ -70,9 +70,9 @@ public:
       unsigned i = addr%setSize;
 
       // find if val in cache
-      for(vector<Entry> v: entries)
+      for(unsigned k = 0; k< assoc; k++)
       {
-         Entry e = v[i];
+         Entry e = entries[k][i];
          if(e.isValid())
          {
             if(e.getTag() == addr-i)
@@ -108,5 +108,5 @@ public:
 private:
    unsigned assoc, setSize;
    set<unsigned> accessed;
-   vector<std::vector<Entry>> entries;
+   vector<std::vector<Entry> > entries;
 };
