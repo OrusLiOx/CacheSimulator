@@ -99,7 +99,7 @@ public:
             e.setRef(ref);
             e.setTag(addr-i);
             e.setValid(true);
-            entries = e;
+            entries[k][i] = e;
             cout<<"Put in: " << k<<","<<i<<endl; 
             e.display();
             cout<<endl; 
