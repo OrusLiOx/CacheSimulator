@@ -75,12 +75,11 @@ public:
       // find if val in cache
       for(unsigned k = 0; k< assoc; k++)
       {
-         Entry e = entries[k][i];
-         if(e.isValid())
+         if(entries[k][i].isValid())
          {
-            if(e.getTag() == addr-i)
+            if(entries[k][i].getTag() == addr-i)
             {
-               e.setRef(ref);
+               entries[k][i].setRef(ref);
                return "HIT";
             }
          }
@@ -91,28 +90,20 @@ public:
       unsigned oldest = 0;
       for(unsigned k = 0; k< assoc; k++)
       {
-         Entry e = entries[k][i];
-         if(!e.isValid())
+         if(!entries[k][i].isValid())
          {
-            cout<<k<<","<<i<< " is available"<<endl;
-            e.display();
-            e.setRef(ref);
-            e.setTag(addr-i);
-            e.setValid(true);
-            entries[k][i] = e;
-            cout<<"Put in: " << k<<","<<i<<endl; 
-            e.display();
-            cout<<endl; 
-            return "MISS - COMPULSARY";
+            entries[k][i].setRef(ref);
+            entries[k][i].setTag(addr-i);
+            entries[k][i].setValid(true);
+            return "MISS";
          }
-         if(e.getRef()<entries[oldest][i].getRef())
+         if(entries[k][i].getRef()<entries[oldest][i].getRef())
             oldest = k;
       }
-      Entry e = entries[oldest][i];
-      e.setRef(ref);
-      e.setTag(addr-i);
-      e.setValid(true);
-      return "MISS - CONFLICT";
+      entries[oldest][i].setRef(ref);
+      entries[oldest][i].setTag(addr-i);
+      entries[oldest][i].setValid(true);
+      return "MISS";
    }
 private:
    unsigned assoc, setSize;

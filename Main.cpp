@@ -33,15 +33,22 @@ int main(int argc, char*argv[])
    // send address to cache
    // cache sends back result
    // record address + result to file
+
+   // setup input stream
    ifstream read;
    read.open(argv[3]);
    string buffer;
    unsigned addr;
    getline(read, buffer);
-
    istringstream input(buffer);
    input >> buffer;
 
+   // setup output file
+   ofstream write;
+   remove("cach_sim_output");
+	write.open("cach_sim_output", std::fstream::out);
+
+   // prepare for loop
    unsigned count = 0;
    Cache cache(entries,assoc);
 
@@ -51,13 +58,13 @@ int main(int argc, char*argv[])
       input >> buffer;
       
       string result = cache.get(count, addr);
-      cout << addr << ": " << result<<endl;
+      write << addr << ": " << result << endl;
       cache.display();
       count++;
    }
 
 // DONE
-   cout << "Check cach_sim_output for results";
+   cout << "Check cach_sim_output for results"<<endl;
   
    return 0;
 }
