@@ -57,14 +57,14 @@ public:
       cout<<"Cache:";
       for(unsigned k = 0; k< assoc; k++)
       {
-         cout << endl << k ;
+         cout << endl << k << "------";
          for(int j=0; j<setSize;j++)
          {
             cout<<endl<< j <<" : ";
             entries[k][j].display();
          } 
       }
-      cout<<endl;
+      cout<<endl << "---------"<<endl;
    }
 
    string get(unsigned ref, unsigned addr)
@@ -96,7 +96,7 @@ public:
             e.setRef(ref);
             e.setTag(addr-i);
             e.setValid(true);
-            return "MISS";
+            return "MISS - COMPULSARY";
          }
          if(e.getRef()<entries[oldest][i].getRef())
             oldest = k;
@@ -105,7 +105,7 @@ public:
       e.setRef(ref);
       e.setTag(addr-i);
       e.setValid(true);
-      return "MISS";
+      return "MISS - CONFLICT";
    }
 private:
    unsigned assoc, setSize;
