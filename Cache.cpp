@@ -94,10 +94,14 @@ public:
          Entry e = entries[k][i];
          if(!e.isValid())
          {
+            cout<<k<<","<<i<< " is available"<<endl;
+            e.display();
             e.setRef(ref);
             e.setTag(addr-i);
             e.setValid(true);
-            cout<<"Put: " << e.isValid() << " " << e.getTag()<< " " << e.getRef()<< " in: "<<k<<","<<i<<endl;  
+            cout<<"Put in: " << k<<","<<i<<endl; 
+            e.display();
+            cout<<endl; 
             return "MISS - COMPULSARY";
          }
          if(e.getRef()<entries[oldest][i].getRef())
