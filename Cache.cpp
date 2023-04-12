@@ -70,7 +70,6 @@ public:
    string get(unsigned ref, unsigned addr)
    {
       unsigned i = addr%setSize;
-      cout<< "get addr: " << addr << " at " << ref << endl << " i = " << i<<endl; 
 
       // find if val in cache
       for(unsigned k = 0; k< assoc; k++)
