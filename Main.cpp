@@ -1,6 +1,7 @@
 #include<iostream>
 #include<cstdlib>
 #include<fstream>
+#include<sstream>
 #include"Cache.cpp"
 
 using namespace std;
@@ -33,16 +34,25 @@ int main(int argc, char*argv[])
    // cache sends back result
    // record address + result to file
    ifstream read;
-   read.open("input");
-   string addr;
-   read >> addr;
+   read.open("text.txt");
+   string buffer;
+   unsigned addr;
+   getline(read, buffer);
 
-   Cache cache;
-   
-   while(addr!="")
+   istringstream input(buffer);
+   input >> buffer;
+
+   unsigned count = 0;
+   Cache cache(entries,assoc);
+
+   while(input)
    {
-
-      read >> addr;
+      addr = stoul(buffer);
+      input >> buffer;
+      
+      string result = cache.get(count, addr);
+      cout << addr << ": " << result<<endl;
+      cache.display();
    }
 
 // DONE
