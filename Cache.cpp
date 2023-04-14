@@ -40,14 +40,14 @@ class Cache
 public:
    Cache(unsigned e, unsigned a)
    {
-      setSize=e/a;
+      sets = e/a;
       assoc = a;
 
-      for(unsigned set = 0; set < a; set++)
+      for(unsigned i= 0; i<sets; i++)
       {
          entries.push_back(vector<Entry>());
-         for(unsigned k = 0; k<setSize; k++)
-            entries[set].push_back(Entry());
+         for(unsigned k = 0; k<a; k++)
+            entries[i].push_back(Entry());
       }
    }
    Cache(){}
@@ -55,30 +55,30 @@ public:
    void display()
    {
       cout<<"Cache:";
-      for(unsigned k = 0; k< assoc; k++)
+      for(unsigned k = 0; k< sets; k++)
       {
-         cout << endl << k << "------";
-         for(int j=0; j<setSize;j++)
+         cout << endl << k << "--------------------";
+         for(int j=0; j<assoc;j++)
          {
             cout<<endl<< j <<" : ";
             entries[k][j].display();
          } 
       }
-      cout<<endl << "---------"<<endl;
+      cout<<endl << "-------------------------"<<endl;
    }
 
    string get(unsigned ref, unsigned addr)
    {
-      unsigned i = addr%setSize;
+      unsigned i = addr%sets;
 
       // find if val in cache
-      for(unsigned k = 0; k< assoc; k++)
+      for(unsigned k = 0; k<assoc; k++)
       {
-         if(entries[k][i].isValid())
+         if(entries[i][k].isValid())
          {
-            if(entries[k][i].getTag() == addr-i)
+            if(entries[i][k].getTag() == addr-i)
             {
-               entries[k][i].setRef(ref);
+               entries[i][k].setRef(ref);
                return "HIT";
             }
          }
@@ -89,23 +89,30 @@ public:
       unsigned oldest = 0;
       for(unsigned k = 0; k< assoc; k++)
       {
-         if(!entries[k][i].isValid())
+         if(!entries[i][k].isValid())
          {
-            entries[k][i].setRef(ref);
-            entries[k][i].setTag(addr-i);
-            entries[k][i].setValid(true);
-            return "MISS";
+            entries[i][k].setRef(ref);
+            entries[i][k].setTag(addr-i);
+            entries[i][k].setValid(true);
+            accessed.insert(addr);
+            return "MISS - COMPULSORY";
          }
-         if(entries[k][i].getRef()<entries[oldest][i].getRef())
+         if(entries[i][k].getRef()<entries[i][oldest].getRef())
             oldest = k;
       }
-      entries[oldest][i].setRef(ref);
-      entries[oldest][i].setTag(addr-i);
-      entries[oldest][i].setValid(true);
-      return "MISS";
+      entries[i][oldest].setRef(ref);
+      entries[i][oldest].setTag(addr-i);
+      entries[i][oldest].setValid(true);
+
+      if(accessed.find(addr) == accessed.end())
+      {
+         accessed.insert(addr);
+         return "MISS - COMPULSORY";
+      }
+      return "MISS - CONFLICT  ";
    }
 private:
-   unsigned assoc, setSize;
+   unsigned assoc, sets;
    set<unsigned> accessed;
    vector<std::vector<Entry> > entries;
 };
