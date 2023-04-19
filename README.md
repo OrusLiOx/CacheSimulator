@@ -1,5 +1,5 @@
 # Cache Simulator
-Given a file of addresses, the program will identify cache hits and misses. Misses will be classified as either compulsory or conflict misses. The program will either run as a multi level cache or single level cache depending on the number of arguements as shown in step 3 of "How to build and run".
+Given a file of addresses, the program will identify cache hits and misses. Misses will be classified as compulsory, capacity, or conflict misses. The program will either run as a multi level cache or single level cache depending on the number of arguements as shown in step 3 of "How to build and run".
 
 The input file should contain a list of positive integers separated by spaces. This repository contains a file called "input". This file can be modified or a new file can be made in the same directory as the executable to test a different input. The index in the cache is specified by low order bits of the address and the tag is the high order bits.
 ## How to build and run
@@ -25,4 +25,4 @@ The input file should contain a list of positive integers separated by spaces. T
     
 ## Known bugs / limitations
 - This program has only been tested on a university provided Linux server using g++ version 4.8.5. Performance on other systems is unknown.
-- The simulated cache doesn't actually store data, so it will never encounter a capacity miss.
+- I'm not confident that conflict and capacity misses are identified correctly.
