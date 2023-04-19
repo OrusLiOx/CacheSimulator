@@ -109,10 +109,27 @@ public:
          accessed.insert(addr);
          return "MISS - COMPULSORY";
       }
+      if(isFull())
+      {
+         return "MISS - CAPACITY  ";
+      }
       return "MISS - CONFLICT  ";
    }
 private:
    unsigned assoc, sets;
    set<unsigned> accessed;
    vector<std::vector<Entry> > entries;
+
+   bool isFull()
+   {
+      for(unsigned k = 0; k< sets; k++)
+      {
+         for(int j=0; j<assoc;j++)
+         {
+            if(!entries[k][j].isValid())
+               return false;
+         }
+      }
+      return true;
+   }
 };
